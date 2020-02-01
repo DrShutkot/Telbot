@@ -71,6 +71,7 @@ def hello(update, context):
 def howareyou(update, context):
     text = update.message.text
     if text.lower() == 'dialog':
+        update.message.reply_text("Включаю Dialog....", reply_markup=markup_over)
         return DIALOG
     if text.lower() == 'назад':
         update.message.reply_text("Возвращаюсь обратно.", reply_markup=markup_inf)
@@ -116,6 +117,8 @@ def error(update, context):
     
 
 def ourdialog(update, context):
+  
+    update.message.reply_text("Я вошел  функцию диалога, но не факт, что я работаю(", reply_markup=markup_over)
     request = apiai.ApiAI('tokenapi').text_request() 
     request.lang = 'ru' 
     request.session_id = '' 
