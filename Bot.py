@@ -116,7 +116,7 @@ def error(update, context):
     
 
 def ourdialog(update, context):
-    request = apiai.ApiAI('a7311f4ce3874dc294d9754f4b0d68cb').text_request() 
+    request = apiai.ApiAI('tokenapi').text_request() 
     request.lang = 'ru' 
     request.session_id = '' 
     request.query = update.message.text 
@@ -142,7 +142,7 @@ def main():
        'cert_reqs': 'CERT_NONE'
     }}
     
-    updater = Updater("1029121456:AAE1obyCzUQt1y07wqh2Uu0u_Gh6gTAK96s", use_context=True,  request_kwargs=REQUEST_KWARGS)
+    updater = Updater("1token", use_context=True,  request_kwargs=REQUEST_KWARGS)
 
     dp = updater.dispatcher
 
