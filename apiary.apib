@@ -1,0 +1,129 @@
+FORMAT: 1A
+HOST: http://localhost:5005 //?
+
+# Api
+
+Api for platform
+
+# API Root [/]
+
+## Entry Point [GET]
+
++ Response 200 (application/json)
+
+        {
+            "telbot": [ "/telbot", "/teloperator", "telallmesage" ], // dict
+            "viberbot":[ "/viberbot", "/viberoperator", "viberallmessage"],
+            "vkbot" :["/vkbot", "/vkoperator", "/vkallmessage" ]
+        }
+## Telegram operator id [/teloperator]
+
+### Operator id_list [GET]
++ Response 200 (application/json)
+
+        { 
+            "list_id":[]
+        }
+        
+### Operator id_list [POST]
+
++ Request (application/json)
+
+        {
+            "id": 1
+        }
+
++ Response 200 (application/json)
+
+        { 
+            "list_id":[]
+        }
+
+
+## Telegram operator [/teloperator/{id}/{templates}]
+
+### Operator [GET]
+
++ Parameters
+    + id: 1 (required, number) 
++ Response 200 (application/json)
+
+        {   
+            "message": 
+            {
+                "id": 1,
+                "text": "str",
+                "image": "null",
+                "buttons": [],
+            },
+            "templates": "default"
+            "operator_id": id
+            "from_rasa": 
+            {
+                "intents": [],
+                "entities":[],
+                "last_time": date,
+            }
++ Response 404 (application/json)
+
+        {
+            "code": 404, 
+            "status": "fail",
+            "reason": "not found",
+        }
+        
+### Operator [POST]
+
++ Parameters
+    + id: 1 (required, number) 
+    + templates: 1 (required, number)
+    
++ Request (application/json)
+
+        {   
+            "message": 
+            {
+                "id": 1,
+                "text": "str",
+                "image": "null",
+                "buttons": [],
+            }
++ Response 200 (application/json)
+
+        {
+              
+            "message": 
+            {
+                "id": 1,
+                "text": "str",
+                "image": "null",
+                "buttons": [],
+            },
+            
+            "templates": 1, 
+            "operator_id":1,
+            "status": "ok",
+            
+        }
++ Response 400 (application/json)
+
+        {
+            "code": 400, 
+            "status": "fail",
+            "reason": "bad",
+        }
+
++ Response 404 (application/json)
+
+        {
+            "code": 404, 
+            "status": "fail",
+            "reason": "not found",
+        }
++ Response 500 (application/json)
+
+        {
+            "code": 500, 
+            "status": "fail",
+            "reason": "bad",
+        }
