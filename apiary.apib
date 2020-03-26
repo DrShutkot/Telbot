@@ -12,11 +12,12 @@ Api for platform
 + Response 200 (application/json)
 
         {
-            "telbot": [ "/telbot", "/teloperator", "telallmesage" ], // dict
-            "viberbot":[ "/viberbot", "/viberoperator", "viberallmessage"],
-            "vkbot" :["/vkbot", "/vkoperator", "/vkallmessage" ]
+            "operator": "/operator"
+            "mes every": "/everybody"
+            
+            
         }
-## Telegram operator id [/teloperator]
+##  operator id [/operator]
 
 ### Operator id_list [GET]
 + Response 200 (application/json)
@@ -25,7 +26,7 @@ Api for platform
             "list_id":[]
         }
         
-### Operator id_list [POST]
+### Operator add id [POST]
 
 + Request (application/json)
 
@@ -40,12 +41,15 @@ Api for platform
         }
 
 
-## Telegram operator [/teloperator/{id}/{templates}]
+## operator [/operator/{canal}/{token}/{id}/{templates}]
 
 ### Operator [GET]
 
 + Parameters
     + id: 1 (required, number) 
+    + canal: "telegram" (required, string)
+    + token: 123 (required, number)
+    
 + Response 200 (application/json)
 
         {   
@@ -76,6 +80,8 @@ Api for platform
 
 + Parameters
     + id: 1 (required, number) 
+    + canal: "telegram" (required, string)
+    + token: 123 (required, number)
     + templates: 1 (required, number)
     
 + Request (application/json)
@@ -91,7 +97,7 @@ Api for platform
 + Response 200 (application/json)
 
         {
-              
+            "canal": "telegram"  
             "message": 
             {
                 "id": 1,
@@ -105,12 +111,20 @@ Api for platform
             "status": "ok",
             
         }
+        
++ Response 201 (application/json)
+
+        {
+            "status":"created"
+        }
+        
 + Response 400 (application/json)
 
         {
             "code": 400, 
             "status": "fail",
             "reason": "bad",
+            "canal": "telegram"
         }
 
 + Response 404 (application/json)
@@ -127,3 +141,38 @@ Api for platform
             "status": "fail",
             "reason": "bad",
         }
+        
+##  Message Everybody [/everybody]
+
+### everybody message [GET]
+
++ Response 200 (application/json)
+
+        {    
+            "canal":{
+                "telegram":
+                    "canal": "telegram"
+                    "chat_id": []
+                    }
+        }
+
+### everybody message [POST]
+
++ Request (application/json)
+
+        {    
+            "canal":{
+            
+                "chat_id":[]
+                "message": {
+                    "id": 1,
+                    "text": "str",
+                    "image": "null",
+                    "buttons": [],
+                    }
+            }
++ Response 200 (application/json)
+
+        {
+            
+            }
